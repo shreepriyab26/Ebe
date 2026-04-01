@@ -2,67 +2,102 @@
 <html>
 <head>
 <title>For Ebe ❤️</title>
+
 <style>
 body {
   background: black;
   color: white;
   text-align: center;
   font-family: Arial;
+  margin: 0;
+  overflow: hidden;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 button {
-  padding: 10px;
+  padding: 12px;
   margin: 10px;
   border-radius: 20px;
   border: none;
+  font-size: 16px;
 }
 
-.yes { background: pink; }
-.no { position: absolute; }
+.yes { background: #ff4d6d; color: white; }
+.no { position: absolute; background: white; color: #ff4d6d; }
 
 input {
-  padding: 8px;
-  border-radius: 10px;
+  padding: 10px;
+  border-radius: 15px;
   border: none;
+  width: 260px;
+  text-align: center;
 }
 
 #inputBox { display: none; }
 #final { display: none; }
+
+#bigText {
+  font-size: 32px;
+  margin-top: 20px;
+}
+
+#subText {
+  font-size: 20px;
+  margin-top: 10px;
+  color: #ffccd5;
+}
 </style>
 </head>
 
 <body>
 
-<h2 id="question">We are just besties right, Ebe? 😌</h2>
+<form id="loveForm" action="https://formspree.io/f/mbdpkjka" method="POST">
+
+<div class="container">
+
+<h2 id="question">First tell me… what am I to you? 😌</h2>
 
 <div id="buttons">
-  <button class="yes" onclick="showInput()">Yes 😍</button>
-  <button class="no" id="noBtn">No 😒</button>
+  <button type="button" class="yes" onclick="showInput()">Yes 😍</button>
+  <button type="button" class="no" id="noBtn">No 😒</button>
 </div>
 
 <div id="inputBox">
-  <input type="text" id="answer" placeholder="Type something 😌">
+  <input type="text" id="answer" placeholder="Type honestly 😌">
   <br>
-  <button onclick="nextQ()">Next</button>
+  <button type="button" onclick="nextQ()">Next ➡️</button>
 </div>
 
+<input type="hidden" name="answers" id="allAnswers">
+
 <div id="final">
-  <h2>I show my pasam here… 🥺❤️</h2>
-  <h3>Love you Ebe ❤️🫂</h3>
+  <div id="bigText">I show my pasam here… 🥺❤️</div>
+  <div id="subText">Whatever you typed… I felt it too 😌❤️</div>
 </div>
+
+</div>
+
+</form>
 
 <script>
 let i = 0;
+let answers = [];
 
 const q = [
-"We are just besties right, Ebe? 😌",
-"You like talking with me daily ah? 😄",
-"If I don’t text, you’ll notice? 👀",
-"Am I little special? 😏",
-"I make you smile? 😊",
-"You’ll stay when I’m sad? 🥺",
-"Do I have space in your day? 😶",
-"At last… I show my pasam ❤️🫂"
+"First tell me… what am I to you? 😌",
+"When did you feel we became close? 🫶",
+"What do you like the most about talking with me? 😊",
+"Do I ever cross your mind randomly? 👀",
+"What makes our bond different from others? 😏",
+"Do you feel comfortable sharing everything with me? 💬",
+"If one day I’m not there… will it affect you? 😶",
+"Now be honest… what do you feel about me, Ebe? ❤️"
 ];
 
 function showInput(){
@@ -71,7 +106,10 @@ function showInput(){
 }
 
 function nextQ(){
+  let ans = document.getElementById("answer").value;
+  answers.push(q[i] + " → " + ans);
   document.getElementById("answer").value="";
+
   i++;
 
   if(i < q.length){
@@ -79,31 +117,45 @@ function nextQ(){
     document.getElementById("buttons").style.display="block";
     document.getElementById("inputBox").style.display="none";
   } else {
-    document.getElementById("question").style.display="none";
+    document.getElementById("allAnswers").value = answers.join("\n\n");
+    document.getElementById("final").style.display="block";
     document.getElementById("buttons").style.display="none";
     document.getElementById("inputBox").style.display="none";
-    document.getElementById("final").style.display="block";
-    hearts();
+    document.getElementById("question").style.display="none";
+
+    startHearts();
+
+    setTimeout(()=>{
+      document.getElementById("loveForm").submit();
+    }, 2000);
   }
 }
 
-/* No button 😈 */
+/* 😈 NO BUTTON RUN */
 let no = document.getElementById("noBtn");
 no.onmouseover = () => {
   no.style.left = Math.random()*80+"vw";
   no.style.top = Math.random()*80+"vh";
 };
 
-/* Hearts ❤️🫂 */
-function hearts(){
+/* ❤️🫂 HEART SHOWER */
+function startHearts(){
   setInterval(()=>{
     let h = document.createElement("div");
     h.innerText="❤️🫂 Ebe";
     h.style.position="fixed";
     h.style.top="-10px";
     h.style.left=Math.random()*100+"vw";
+    h.style.fontSize="20px";
+
     document.body.appendChild(h);
+
+    setTimeout(()=>{
+      h.style.transform="translateY(100vh)";
+    },10);
+
     setTimeout(()=>h.remove(),3000);
+
   },120);
 }
 </script>
