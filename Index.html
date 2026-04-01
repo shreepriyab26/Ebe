@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Ebe ❤️</title>
+<style>
+body {
+  background: black;
+  color: white;
+  text-align: center;
+  font-family: Arial;
+}
+
+button {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 20px;
+  border: none;
+}
+
+.yes { background: pink; }
+.no { position: absolute; }
+
+input {
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+}
+
+#inputBox { display: none; }
+#final { display: none; }
+</style>
+</head>
+
+<body>
+
+<h2 id="question">We are just besties right, Ebe? 😌</h2>
+
+<div id="buttons">
+  <button class="yes" onclick="showInput()">Yes 😍</button>
+  <button class="no" id="noBtn">No 😒</button>
+</div>
+
+<div id="inputBox">
+  <input type="text" id="answer" placeholder="Type something 😌">
+  <br>
+  <button onclick="nextQ()">Next</button>
+</div>
+
+<div id="final">
+  <h2>I show my pasam here… 🥺❤️</h2>
+  <h3>Love you Ebe ❤️🫂</h3>
+</div>
+
+<script>
+let i = 0;
+
+const q = [
+"We are just besties right, Ebe? 😌",
+"You like talking with me daily ah? 😄",
+"If I don’t text, you’ll notice? 👀",
+"Am I little special? 😏",
+"I make you smile? 😊",
+"You’ll stay when I’m sad? 🥺",
+"Do I have space in your day? 😶",
+"At last… I show my pasam ❤️🫂"
+];
+
+function showInput(){
+  document.getElementById("buttons").style.display="none";
+  document.getElementById("inputBox").style.display="block";
+}
+
+function nextQ(){
+  document.getElementById("answer").value="";
+  i++;
+
+  if(i < q.length){
+    document.getElementById("question").innerText=q[i];
+    document.getElementById("buttons").style.display="block";
+    document.getElementById("inputBox").style.display="none";
+  } else {
+    document.getElementById("question").style.display="none";
+    document.getElementById("buttons").style.display="none";
+    document.getElementById("inputBox").style.display="none";
+    document.getElementById("final").style.display="block";
+    hearts();
+  }
+}
+
+/* No button 😈 */
+let no = document.getElementById("noBtn");
+no.onmouseover = () => {
+  no.style.left = Math.random()*80+"vw";
+  no.style.top = Math.random()*80+"vh";
+};
+
+/* Hearts ❤️🫂 */
+function hearts(){
+  setInterval(()=>{
+    let h = document.createElement("div");
+    h.innerText="❤️🫂 Ebe";
+    h.style.position="fixed";
+    h.style.top="-10px";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),3000);
+  },120);
+}
+</script>
+
+</body>
+</html>
