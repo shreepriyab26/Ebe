@@ -42,15 +42,20 @@ input {
 #inputBox { display: none; }
 #final { display: none; }
 
-#bigText {
-  font-size: 32px;
-  margin-top: 20px;
+/* ❤️ BIG HEART */
+#heartContainer {
+  font-size: 100px;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.8s ease;
 }
 
-#subText {
-  font-size: 20px;
-  margin-top: 10px;
-  color: #ffccd5;
+/* 💖 LOVE TEXT */
+#loveText {
+  font-size: 28px;
+  margin-top: 20px;
+  opacity: 0;
+  transition: opacity 1s ease;
 }
 </style>
 </head>
@@ -77,8 +82,8 @@ input {
 <input type="hidden" name="answers" id="allAnswers">
 
 <div id="final">
-  <div id="bigText">I show my pasam here… 🥺❤️</div>
-  <div id="subText">Whatever you typed… I felt it too 😌❤️</div>
+  <div id="heartContainer">❤️</div>
+  <div id="loveText">Love you Ebe ❤️🫂</div>
 </div>
 
 </div>
@@ -118,16 +123,32 @@ function nextQ(){
     document.getElementById("inputBox").style.display="none";
   } else {
     document.getElementById("allAnswers").value = answers.join("\n\n");
-    document.getElementById("final").style.display="block";
+
+    document.getElementById("question").style.display="none";
     document.getElementById("buttons").style.display="none";
     document.getElementById("inputBox").style.display="none";
-    document.getElementById("question").style.display="none";
+    document.getElementById("final").style.display="block";
 
-    startHearts();
+    /* ❤️ HEART POP */
+    setTimeout(()=>{
+      document.getElementById("heartContainer").style.opacity="1";
+      document.getElementById("heartContainer").style.transform="scale(1.5)";
+    },200);
 
+    /* 💖 TEXT APPEAR */
+    setTimeout(()=>{
+      document.getElementById("loveText").style.opacity="1";
+    },1000);
+
+    /* 💘 HEART SHOWER */
+    setTimeout(()=>{
+      startHearts();
+    },1500);
+
+    /* 💌 SEND MAIL */
     setTimeout(()=>{
       document.getElementById("loveForm").submit();
-    }, 2000);
+    },2500);
   }
 }
 
